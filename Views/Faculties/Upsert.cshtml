@@ -1,0 +1,78 @@
+﻿@model parcial1.Models.Faculties
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a asp-controller="Home" asp-action="index">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a asp-controller="Faculties" asp-action="Index">Index</a>
+        </li>
+        <li class="breadcrumb-item">
+
+        </li>
+
+    </ol>
+</nav>
+
+
+
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white text-center rounded-top-4">
+            <h3><i class="fas fa-university"></i> Administrar Facultad</h3>
+        </div>
+        <div class="card-body p-4">
+            <form asp-action="UpSert" asp-controller="Faculties" method="POST">
+                <input type="hidden" asp-for="FacultiesId" />
+
+                <!-- Nombre de la Facultad -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Nombre de la Facultad</label>
+                    <input type="text" class="form-control border-primary shadow-sm" asp-for="FacultyName" placeholder="Ejemplo: Facultad de Ingeniería">
+                    <span asp-validation-for="FacultyName" class="text-danger"></span>
+                </div>
+
+                <!-- Checkbox Activo -->
+                <div class="form-check form-switch mb-3">
+                    <input class="form-check-input" type="checkbox" asp-for="IsActive">
+                    <label class="form-check-label fw-bold">Activo</label>
+                </div>
+
+                <!-- Fecha de Creación -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Fecha de Creación</label>
+                    <input type="text" class="form-control border-secondary shadow-sm" value="@Model.Created.ToString("yyyy-MM-dd HH:mm")" readonly>
+                </div>
+
+                <!-- Creado por -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Creado por</label>
+                    <input type="text" class="form-control border-primary shadow-sm" asp-for="CreatedBy" placeholder="Ejemplo: Juan Pérez">
+                    <span asp-validation-for="CreatedBy" class="text-danger"></span>
+                </div>
+
+                <!-- Fecha de Edición -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Fecha de Edición</label>
+                    <input type="text" class="form-control border-secondary shadow-sm" value="@(Model.Edited.HasValue ? Model.Edited.Value.ToString("yyyy-MM-dd HH:mm") : "No editado")" readonly>
+                </div>
+
+                <!-- Editado por -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Editado por</label>
+                    <input type="text" class="form-control border-primary shadow-sm" asp-for="EditedBy" placeholder="Ejemplo: María Gómez">
+                </div>
+
+                <!-- Botón de Guardar -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success shadow"><i class="fas fa-save"></i> Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
